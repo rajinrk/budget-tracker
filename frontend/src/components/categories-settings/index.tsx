@@ -77,8 +77,8 @@ export const CategoriesSettings: React.FC = () => {
   };
 
   return (
-    <Box sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
+    <Box >
+      <Box  className='flex justify-between mb-3 flex-col md:flex-row'>
         <Typography variant="h5">Categories</Typography>
         <Button
           variant="contained"
@@ -89,7 +89,7 @@ export const CategoriesSettings: React.FC = () => {
         </Button>
       </Box>
 
-    {categories?.length > 0 ?  <TableContainer component={Paper}>
+    {categories?.length > 0 ?  <TableContainer component={Paper}  sx={{ p: { xs: 1, sm: 3 }, overflowX: 'auto' }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -99,7 +99,7 @@ export const CategoriesSettings: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {categories?.length > 0 && categories?.map((category: Category) => (
+            { categories?.map((category: Category) => (
               <TableRow key={category._id}>
                 <TableCell>{category.name}</TableCell>
                 <TableCell  ><div className='w-[15px] h-[15px] rounded-[20px]' style={{ backgroundColor: category.color }}></div></TableCell>

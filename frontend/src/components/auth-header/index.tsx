@@ -1,6 +1,5 @@
 import {
     FormControl,
-    InputLabel,
     MenuItem,
     Select,
     IconButton,
@@ -13,7 +12,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import SettingsIcon from '@mui/icons-material/Settings';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +29,12 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({ logout }) => {
     const open = Boolean(anchorEl);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
+    const [pathName,setPathname] = useState<string>('')
+
+    useEffect(()=>{
+        setPathname(window.location.pathname)
+    },[window.location.pathname])
 
 
 
@@ -70,10 +75,13 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({ logout }) => {
         });
     };
 
+console.log(pathName,'path');
+    
+
     return (
         <div className="flex items-center gap-4">
             {/* Month Selector */}
-            <FormControl
+           {pathName === '/dashboard' && <FormControl
                 variant="outlined"
                 size="small"
                 sx={{
@@ -82,6 +90,7 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({ logout }) => {
                     border: '1px solid #e0e0e0',
                     minWidth: 180,
                 }}
+                className='hidden md:block'
             >
                 <Select
                     className="text-white"
@@ -95,7 +104,7 @@ export const AuthHeader: React.FC<AuthHeaderProps> = ({ logout }) => {
                         </MenuItem>
                     ))}
                 </Select>
-            </FormControl>
+            </FormControl>}
 
             {/* Menu Icon */}
             <IconButton onClick={handleMenuOpen} sx={{ color: 'black' }}>

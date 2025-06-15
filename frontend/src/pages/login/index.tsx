@@ -44,7 +44,8 @@ export const  Login:React.FC = () => {
   const isLoading = useSelector(getAuthLoading);
   const [showPassword, setShowPassword] = useState(false);
 
-  const { values, handleChange, handleBlur, handleSubmit, errors, touched, isSubmitting, setSubmitting } = useFormik<LoginFormData>({
+      // TODO: Handle login logic here
+  const { values, handleChange, handleBlur, handleSubmit, errors, touched, isValid} = useFormik<LoginFormData>({
     initialValues: {
       email: '',
       password: '',
@@ -53,14 +54,12 @@ export const  Login:React.FC = () => {
     validateOnChange: true,
     validateOnBlur: true,
     onSubmit: (values) => {
-      // TODO: Handle login logic here
       dispatch(loginRequest(values));
     },
   });
 
   useEffect(() => {
     if (errorMsg) {
-      setSubmitting(false);
       alert(errorMsg);
     }
     if (successMsg) {
@@ -138,9 +137,9 @@ export const  Login:React.FC = () => {
             fullWidth
             size="large"
             className="mt-6"
-            disabled={isSubmitting}
+            disabled={!isValid}
           >
-            {isSubmitting ? 'Signing In...' : 'Sign In'}
+            {isLoading ? 'Signing In...' : 'Sign In'}
           </Button>
           <Box className="text-center mt-4">
             <Typography variant="body2">

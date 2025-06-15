@@ -114,44 +114,7 @@ export const getMonthlyReport = async (req: Request, res: Response) => {
   }
 };
 
-// Get expense summary by category
-export const getExpenseSummary = async (req: Request, res: Response) => {
-  try {
-    const { startDate, endDate } = req.query;
-    const query: any = { userId: req.user._id };
-    
-    if (startDate && endDate) {
-      query.date = {
-        $gte: new Date(startDate as string),
-        $lte: new Date(endDate as string)
-      };
-    }
 
-    const expenses = await Expense.aggregate([
-      { $match: query },
-      {
-        $group: {
-          _id: '$categoryId',
-          total: { $sum: '$amount' },
-          count: { $sum: 1 }
-        }
-      },
-      {
-        $lookup: {
-          from: 'categories',
-          localField: '_id',
-          foreignField: '_id',
-          as: 'category'
-        }
-      },
-      { $unwind: '$category' }
-    ]);
-
-    return successResponse(res, 'EXPENSE_SUMMARY_FETCHED', expenses);
-  } catch (error: any) {
-    return errorResponse(res, 'ERROR_FETCHING_EXPENSE_SUMMARY', error.message);
-  }
-};
 
 // Get monthly expense trend
 export const getMonthlyTrend = async (req: Request, res: Response) => {

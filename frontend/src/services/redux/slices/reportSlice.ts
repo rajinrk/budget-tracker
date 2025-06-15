@@ -42,43 +42,6 @@ const reportSlice = createSlice({
       state.errorCode = null;
     },
 
-    fetchReportRequest(state) {
-      state.isLoading = true;
-      state.successCode = null;
-      state.errorCode = null;
-    },
-
-    fetchReportSuccess(state, action) {
-      state.isLoading = false;
-      state.successCode = action.payload.status_code;
-      state.data = action.payload.data;
-      state.errorCode = null;
-    },
-
-    fetchReportFailure(state, action) {
-      state.isLoading = false;
-      state.errorCode = action.payload.status_code;
-      state.successCode = null;
-    },
-
-    fetchExpenseSummaryRequest(state) {
-      state.isLoading = true;
-      state.successCode = null;
-      state.errorCode = null;
-    },
-
-    fetchExpenseSummarySuccess(state, action) {
-      state.isLoading = false;
-      state.successCode = action.payload.status_code;
-      state.data = action.payload.data;
-      state.errorCode = null;
-    },
-
-    fetchExpenseSummaryFailure(state, action) {
-      state.isLoading = false;
-      state.errorCode = action.payload.status_code;
-      state.successCode = null;
-    },
 
     fetchMonthlyTrendRequest(state) {
       state.isLoading = true;
@@ -103,12 +66,6 @@ const reportSlice = createSlice({
 
 export const {
   resetReportStatus,
-  fetchReportRequest,
-  fetchReportSuccess,
-  fetchReportFailure,
-  fetchExpenseSummaryRequest,
-  fetchExpenseSummarySuccess,
-  fetchExpenseSummaryFailure,
   fetchMonthlyTrendRequest,
   fetchMonthlyTrendSuccess,
   fetchMonthlyTrendFailure,

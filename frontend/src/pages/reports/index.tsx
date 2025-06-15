@@ -12,6 +12,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  useTheme,
+  useMediaQuery,
+  TableContainer,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -31,6 +34,9 @@ const ReportsPage: React.FC = () => {
 
   const [selectedMonth, setSelectedMonth] = useState(dayjs().format('YYYY-MM'));
 
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+
 
   useEffect(() => {
     handleGetReport(selectedMonth)
@@ -40,7 +46,7 @@ const ReportsPage: React.FC = () => {
 
   useToastMessage({ errorMsg, successMsg, resetFunction: resetReportStatus })
 
-  const handleGetReport = (val?:any) => {
+  const handleGetReport = (val?: any) => {
     const payload: any = { month: val }
     dispatch(fetchMonthlyTrendRequest(payload));
 
@@ -97,38 +103,51 @@ const ReportsPage: React.FC = () => {
           </FormControl>
         </Box>
 
-        {reports?.categories?.length > 0 ? <Box sx={{ p: 3 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Category</TableCell>
-                <TableCell>Budget (₹)</TableCell>
-                <TableCell>Spent (₹)</TableCell>
-                <TableCell>Remaining (₹)</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {reports?.categories?.map((row: any) => {
-                const remaining = getRemaining(row.budget, row.spent);
-                return (
-                  <TableRow key={row._id}>
-                    <TableCell>{row?.category?.name}</TableCell>
-                    <TableCell>{row?.budget}</TableCell>
-                    <TableCell>{row?.spent}</TableCell>
-                    <TableCell
-                      sx={{
-                        color: remaining < 0 ? 'error.main' : 'success.main',
-                        fontWeight: 600,
-                      }}
-                    >
-                      {remaining}
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </Box> : <div className='w-full min-h-[60vh] flex items-center justify-center'> <Typography className='text-[26px]'>No Items Found</Typography> </div>}
+        {reports?.categories?.length > 0 ? (
+          <TableContainer component={Paper} sx={{ p: { xs: 1, sm: 3 }, overflowX: 'auto' }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Category</TableCell>
+                  <TableCell>Budget (₹)</TableCell>
+                  <TableCell>Spent (₹)</TableCell>
+                  <TableCell>Remaining (₹)</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {reports?.categories?.map((row: any) => {
+                  const remaining = getRemaining(row.budget, row.spent);
+                  return (
+                    <TableRow key={row._id}>
+                      <TableCell>{row?.category?.name}</TableCell>
+                      <TableCell>{row?.budget}</TableCell>
+                      <TableCell>{row?.spent}</TableCell>
+                      <TableCell
+                        sx={{
+                          color: remaining < 0 ? 'error.main' : 'success.main',
+                          fontWeight: 600,
+                        }}
+                      >
+                        {remaining}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+
+          </TableContainer>
+        ) : (
+          <Box sx={{
+            width: '100%',
+            minHeight: '60vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Typography variant={'h5'}>No Items Found</Typography>
+          </Box>
+        )}
       </Paper>
     </Box>
   );

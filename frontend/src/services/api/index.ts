@@ -133,26 +133,7 @@ export const deleteCategoryAPI = async (id: string): Promise<any> => {
   });
 };
 
-// Report APIs
-export const getMonthlyReportAPI = async (month: string): Promise<any> => {
-  return createAxiosInstance({
-    url: `/api/reports/monthly?month=${month}`,
-    method: 'GET',
-    headers: { ...defaultHeader, Authorization: authHeader() }
-  });
-};
-
-export const getExpenseSummaryAPI = async (params: { startDate?: string; endDate?: string }): Promise<any> => {
-  const queryParams = new URLSearchParams();
-  if (params.startDate) queryParams.append('startDate', params.startDate);
-  if (params.endDate) queryParams.append('endDate', params.endDate);
-
-  return createAxiosInstance({
-    url: `/api/reports/expense-summary?${queryParams.toString()}`,
-    method: 'GET',
-    headers: { ...defaultHeader, Authorization: authHeader() }
-  });
-};
+// Report API
 
 export const getMonthlyTrendAPI = async (params: any): Promise<any> => {
   return createAxiosInstance({
@@ -172,14 +153,7 @@ export const getCategorySpendingAPI = async (params: any): Promise<any> => {
   });
 };
 
-export const createPostAPI = async (data: any) => {
-  return createAxiosInstance({
-    url: '/api/posts',
-    method: 'POST',
-    headers: { ...defaultHeader, Authorization: authHeader() },
-    data,
-  });
-};
+
 
 
 

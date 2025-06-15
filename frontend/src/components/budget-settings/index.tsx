@@ -78,7 +78,7 @@ export const BudgetSettings: React.FC = () => {
 
   return (
     <Box>
-      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+      <Box className='flex justify-between mb-3 flex-col md:flex-row'>
         <Typography variant="h6">Manage Budgets</Typography>
         <Button variant="contained" onClick={() => {
           setEditBudget(null);
@@ -88,7 +88,7 @@ export const BudgetSettings: React.FC = () => {
         </Button>
       </Box>
 
-      <Table component={Paper}>
+     {budgets?.length > 0 ?  <Table component={Paper}>
         <TableHead>
           <TableRow>
             <TableCell>Category</TableCell>
@@ -97,7 +97,7 @@ export const BudgetSettings: React.FC = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {budgets?.length > 0 && budgets?.map((b: any) => (
+          { budgets?.map((b: any) => (
             <TableRow key={b._id}>
               <TableCell>{b.categoryId.name}</TableCell>
               <TableCell>₹{b.amount}</TableCell>
@@ -117,7 +117,8 @@ export const BudgetSettings: React.FC = () => {
             </TableRow>
           ))}
         </TableBody>
-      </Table>
+      </Table>:<Typography
+      >No Budgets Found</Typography>}
 
       {/* Dialog for Add/Edit */}
       <BudgetDialog
