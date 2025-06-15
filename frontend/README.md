@@ -23,7 +23,7 @@ A full-stack blog application built with React, TypeScript, and Material-UI, fea
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd near-pay/frontend
+cd budget-tracker/frontend
 ```
 
 2. Install dependencies:

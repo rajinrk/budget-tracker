@@ -23,7 +23,7 @@ The backend server for Budget tracker, built with Node.js, Express, TypeScript, 
 1. Clone the repository:
 ```bash
 git clone <repository-url>
-cd near-pay/backend
+cd budget-tracker/backend
 ```
 
 2. Install dependencies:
