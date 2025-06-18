@@ -6,6 +6,8 @@ const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    console.log(event);
+
     setActiveTab(newValue);
   };
 
