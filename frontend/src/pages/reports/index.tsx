@@ -12,21 +12,20 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
-  useTheme,
-  useMediaQuery,
   TableContainer,
 } from '@mui/material';
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMonthlyTrendRequest, resetReportStatus } from '../../services/redux/slices';
-import { getReportData, getReportErrorCode, getReportSuccessCode } from '../../services/redux/selectors';
+import {
+  getReportData,
+  getReportErrorCode,
+  getReportSuccessCode,
+} from '../../services/redux/selectors';
 import { useToastMessage } from '../../hooks';
 
-
-
 const ReportsPage: React.FC = () => {
-  const dispatch = useDispatch()
-
+  const dispatch = useDispatch();
 
   const errorMsg = useSelector(getReportErrorCode);
   const successMsg = useSelector(getReportSuccessCode);
@@ -34,23 +33,16 @@ const ReportsPage: React.FC = () => {
 
   const [selectedMonth, setSelectedMonth] = useState(dayjs().format('YYYY-MM'));
 
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-
   useEffect(() => {
-    handleGetReport(selectedMonth)
+    handleGetReport(selectedMonth);
   }, [dispatch]);
 
-
-
-  useToastMessage({ errorMsg, successMsg, resetFunction: resetReportStatus })
+  useToastMessage({ errorMsg, successMsg, resetFunction: resetReportStatus });
 
   const handleGetReport = (val?: any) => {
-    const payload: any = { month: val }
+    const payload: any = { month: val };
     dispatch(fetchMonthlyTrendRequest(payload));
-
-  }
+  };
   const getRemaining = (budget: number, spent: number) => {
     return budget - spent;
   };
@@ -66,9 +58,9 @@ const ReportsPage: React.FC = () => {
   };
 
   const handleMonthChange = (val: any) => {
-    setSelectedMonth(val)
-    handleGetReport(val)
-  }
+    setSelectedMonth(val);
+    handleGetReport(val);
+  };
 
   return (
     <Box className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-200 py-10 px-4">
@@ -92,9 +84,9 @@ const ReportsPage: React.FC = () => {
               labelId="month-label"
               value={selectedMonth}
               label="Select Month"
-              onChange={(e) => handleMonthChange(e.target.value)}
+              onChange={e => handleMonthChange(e.target.value)}
             >
-              {getMonthOptions().map((month) => (
+              {getMonthOptions().map(month => (
                 <MenuItem key={month.value} value={month.value}>
                   {month.label}
                 </MenuItem>
@@ -135,16 +127,17 @@ const ReportsPage: React.FC = () => {
                 })}
               </TableBody>
             </Table>
-
           </TableContainer>
         ) : (
-          <Box sx={{
-            width: '100%',
-            minHeight: '60vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+          <Box
+            sx={{
+              width: '100%',
+              minHeight: '60vh',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <Typography variant={'h5'}>No Items Found</Typography>
           </Box>
         )}

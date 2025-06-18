@@ -13,17 +13,16 @@ const initialState: BudgetState = {
   loading: false,
   successCode: null,
   errorCode: null,
-  selectedMonth: new Date().toISOString().slice(0, 7)
+  selectedMonth: new Date().toISOString().slice(0, 7),
 };
 
 const budgetSlice = createSlice({
   name: 'budget',
   initialState,
   reducers: {
-    fetchBudgetsRequest: (state) => {
+    fetchBudgetsRequest: state => {
       state.loading = true;
       state.errorCode = null;
-      
     },
     fetchBudgetsSuccess: (state, action) => {
       state.loading = false;
@@ -33,7 +32,7 @@ const budgetSlice = createSlice({
       state.loading = false;
       state.errorCode = action.payload.status_code;
     },
-    createBudgetRequest: (state) => {
+    createBudgetRequest: state => {
       state.loading = true;
       state.errorCode = null;
     },
@@ -44,9 +43,8 @@ const budgetSlice = createSlice({
     createBudgetFailure: (state, action) => {
       state.loading = false;
       state.errorCode = action.payload.status_code;
-  
     },
-    updateBudgetRequest: (state) => {
+    updateBudgetRequest: state => {
       state.loading = true;
       state.errorCode = null;
     },
@@ -58,23 +56,23 @@ const budgetSlice = createSlice({
       state.loading = false;
       state.errorCode = action.payload.status_code;
     },
-    deleteBudgetRequest: (state,action:any) => {
+    deleteBudgetRequest: state => {
       state.loading = true;
       state.errorCode = null;
     },
     deleteBudgetSuccess: (state, action) => {
       state.loading = false;
-    
+
       state.successCode = action.payload.status_code;
     },
     deleteBudgetFailure: (state, action) => {
       state.loading = false;
       state.errorCode = action.payload.status_code;
     },
-    resetBudgetState: (state) => {
+    resetBudgetState: state => {
       state.successCode = null;
       state.errorCode = null;
-    }
+    },
   },
 });
 
@@ -94,4 +92,4 @@ export const {
   resetBudgetState,
 } = budgetSlice.actions;
 
-export default budgetSlice.reducer; 
+export default budgetSlice.reducer;

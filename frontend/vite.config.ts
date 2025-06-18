@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
 
@@ -8,8 +8,8 @@ export default defineConfig({
   plugins: [react()],
   css: {
     postcss: {
-      plugins: [tailwindcss(), autoprefixer()]
-    }
+      plugins: [tailwindcss(), autoprefixer()],
+    },
   },
   server: {
     port: 4000,
@@ -18,17 +18,17 @@ export default defineConfig({
         target: 'http://localhost:5000',
         changeOrigin: true,
         secure: false,
-      }
-    }
+      },
+    },
   },
   resolve: {
     alias: {
-      '@': '/src'
-    }
+      '@': '/src',
+    },
   },
   build: {
     outDir: 'dist',
     sourcemap: true,
     minify: 'esbuild',
-  }
-})
+  },
+});

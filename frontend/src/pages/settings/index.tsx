@@ -1,13 +1,6 @@
-// src/pages/SettingsPage.tsx
 import React, { useState } from 'react';
-import {
-  Box,
-  Tabs,
-  Tab,
-  Paper,
-  Typography,
-} from '@mui/material';
-import { BudgetSettings, CategoriesSettings  } from '../../components';
+import { Box, Tabs, Tab, Paper, Typography } from '@mui/material';
+import { BudgetSettings, CategoriesSettings } from '../../components';
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -43,14 +36,8 @@ const SettingsPage = () => {
               boxShadow: 1,
             }}
           >
-            <Tab
-              label="Categories"
-              sx={{ fontWeight: '600', textTransform: 'none' }}
-            />
-            <Tab
-              label="Budgets"
-              sx={{ fontWeight: '600', textTransform: 'none' }}
-            />
+            <Tab label="Categories" sx={{ fontWeight: '600', textTransform: 'none' }} />
+            <Tab label="Budgets" sx={{ fontWeight: '600', textTransform: 'none' }} />
           </Tabs>
         </Box>
 
