@@ -32,7 +32,7 @@ const authSlice: any = createSlice({
       state.isLoading = false;
       state.successCode = action.payload.status_code;
       state.isAuthenticated = true;
-      sessionStorage.setItem('near-pay-token', action.payload.data.token);
+      localStorage.setItem('near-pay-token', action.payload.data.token);
       state.errorCode = null;
     },
 
@@ -65,7 +65,7 @@ const authSlice: any = createSlice({
       state.successCode = null;
       state.errorCode = null;
       state.isAuthenticated = false;
-      sessionStorage.removeItem('near-pay-token');
+      localStorage.removeItem('near-pay-token');
     },
   },
 });
