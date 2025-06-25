@@ -61,11 +61,12 @@ const authSlice: any = createSlice({
     },
 
     logout(state) {
-      state.isLoading = true;
+      state.isLoading = false;
       state.successCode = null;
       state.errorCode = null;
       state.isAuthenticated = false;
       localStorage.removeItem('near-pay-token');
+      localStorage.clear();
     },
   },
 });

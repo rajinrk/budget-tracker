@@ -1,12 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Box, Typography } from '@mui/material';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { getIsAuthenticated } from '../../services/redux/selectors';
 import { PublicRoute } from '../public-route';
 import { Login, Register } from '../../pages';
@@ -21,7 +16,6 @@ import ReportsPage from '../../pages/reports';
 export const RootNavigation: React.FC = () => {
   const isAuthenticated = useSelector(getIsAuthenticated);
 
-
   return (
     <BrowserRouter>
       <Box className="min-h-screen flex flex-col">
@@ -30,51 +24,15 @@ export const RootNavigation: React.FC = () => {
         <Box className="flex-1">
           <Routes>
             {/* Public Routes */}
-            <Route
-              path="/"
-              element={
-                <PublicRoute
-                  element={<Navigate to="/login" replace />}
-                />
-              }
-            />
-            <Route
-              path="/login"
-              element={
-                <PublicRoute
-                  element={<Login />}
-                />
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <PublicRoute
-                  element={<Register />}
-                />
-              }
-            />
+            <Route path="/" element={<PublicRoute element={<Navigate to="/login" replace />} />} />
+            <Route path="/login" element={<PublicRoute element={<Login />} />} />
+            <Route path="/register" element={<PublicRoute element={<Register />} />} />
 
-            <Route
-              path="/dashboard"
-              element={
-                <ProtectedRoute element={<Dashboard />} />
-              }
-            />
+            <Route path="/dashboard" element={<ProtectedRoute element={<Dashboard />} />} />
 
-            <Route
-              path="/settings"
-              element={
-                <ProtectedRoute element={<SettingsPage />} />
-              }
-            />
+            <Route path="/settings" element={<ProtectedRoute element={<SettingsPage />} />} />
 
-            <Route
-              path="/reports"
-              element={
-                <ProtectedRoute element={<ReportsPage />} />
-              }
-            />
+            <Route path="/reports" element={<ProtectedRoute element={<ReportsPage />} />} />
 
             {/* 404 Route */}
             <Route
